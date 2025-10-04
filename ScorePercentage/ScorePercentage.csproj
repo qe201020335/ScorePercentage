@@ -28,9 +28,14 @@
 
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
+    <EmbeddedResource Include="Menu\Settings.bsml" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="0Harmony">
+      <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="BeatSaber.ViewSystem">
       <Private>false</Private>
     </Reference>
@@ -55,10 +60,9 @@
       <Private>false</Private>
     </Reference>
     <Reference Include="SiraUtil">
-      <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
       <Private>false</Private>
+      <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
     <Reference Include="Unity.TextMeshPro">
       <Private>false</Private>
     </Reference>
@@ -76,6 +80,12 @@
     </Reference>
     <Reference Include="UnityEngine.UIModule">
       <Private>False</Private>
+    </Reference>
+    <Reference Include="Zenject">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Zenject-usage">
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
 

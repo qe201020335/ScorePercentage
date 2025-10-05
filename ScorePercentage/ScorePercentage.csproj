@@ -39,6 +39,13 @@
       <Private>false</Private>
       <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
     </Reference>
+    <Reference Include="AdditionalContentModel.Interfaces">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BeatmapCore">
+      <Private>false</Private>
+      <Publicize>true</Publicize>
+    </Reference>
     <Reference Include="BeatSaber.ViewSystem">
       <Private>false</Private>
     </Reference>

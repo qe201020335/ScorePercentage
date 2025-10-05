@@ -12,9 +12,6 @@ namespace ScorePercentage.Menu;
 internal class SettingsController : IInitializable
 {
     [Inject]
-    private readonly Plugin _plugin = null!;
-
-    [Inject]
     private readonly PluginConfig _config = null!;
 
     [Inject]
@@ -68,5 +65,5 @@ internal class SettingsController : IInitializable
     }
 
     [UIValue("multiplayer-info-installed")]
-    public bool MultiplayerInfoInstalled => _plugin.MultiplayerInfoInstalled;
+    public bool MultiplayerInfoInstalled => Plugin.Instance.MultiplayerInfoInstalled;
 }

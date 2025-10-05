@@ -1,10 +1,12 @@
 ﻿using System.Linq;
 using System.Reflection;
 using HarmonyLib;
+using Hive.Versioning;
 using IPA;
 using IPA.Config;
 using IPA.Loader;
 using IPA.Logging;
+using ScorePercentage.Installers;
 using SiraUtil.Zenject;
 
 namespace ScorePercentage;
@@ -17,6 +19,7 @@ internal class Plugin
     private const string MappingExtensionsId = "MappingExtensions";
     private const string SongPlayHistoryId = "SongPlayHistory";
 
+    internal static Plugin Instance { get; private set; } = null!;
     internal static Logger Logger { get; private set; } = null!;
 
     private readonly Harmony _harmony;
@@ -31,6 +34,7 @@ internal class Plugin
     [Init]
     public Plugin(Logger logger, Config config, Zenjector zenjector)
     {
+        Instance = this;
         Logger = logger;
         _harmony = new Harmony(HarmonyId);
         PluginConfig.Initialize(config);
@@ -41,11 +45,19 @@ internal class Plugin
 
         zenjector.UseLogger(Logger);
         zenjector.UseAutoBinder();
-        zenjector.Install(Location.App, container =>
+        zenjector.Install(Location.App, container => { container.BindInstance(PluginConfig.Instance); });
+
+        if (SPHMetadata.HVersion >= new Version(2, 3, 0))
         {
-            container.BindInstance(this);
-            container.BindInstance(PluginConfig.Instance);
-        });
+            // use SPH's data
+            zenjector.Install<SPHDataInstaller>(Location.App);
+        }
+        else
+        {
+            zenjector.Install<SongPlayDataInstaller>(Location.App);
+        }
+
+        zenjector.Install<MenuInstaller>(Location.Menu);
 
         Logger.Info("Plugin initialized");
     }

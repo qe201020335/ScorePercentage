@@ -19,6 +19,9 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="BepInEx.AssemblyPublicizer.MSBuild" Version="0.4.1">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -33,25 +36,41 @@
 
   <ItemGroup>
     <Reference Include="0Harmony">
-      <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
       <Private>false</Private>
+      <HintPath>$(BeatSaberDir)\Libs\0Harmony.dll</HintPath>
     </Reference>
     <Reference Include="BeatSaber.ViewSystem">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BGNetCore">
       <Private>false</Private>
     </Reference>
     <Reference Include="BSML">
       <Private>false</Private>
       <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
     </Reference>
+    <Reference Include="DataModels">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="GameplayCore">
+      <Private>false</Private>
+    </Reference>
     <Reference Include="Hive.Versioning">
       <Private>false</Private>
       <HintPath>$(BeatSaberDir)\Libs\Hive.Versioning.dll</HintPath>
+    </Reference>
+    <Reference Include="HMUI">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Interactable">
+      <Private>false</Private>
     </Reference>
     <Reference Include="IPA.Loader">
       <Private>false</Private>
     </Reference>
     <Reference Include="Main">
       <Private>false</Private>
+      <Publicize>true</Publicize>
     </Reference>
     <Reference Include="mscorlib">
       <Private>false</Private>
@@ -62,6 +81,10 @@
     <Reference Include="SiraUtil">
       <Private>false</Private>
       <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
+    </Reference>
+    <Reference Include="SongPlayHistory">
+      <Private>false</Private>
+      <HintPath>$(BeatSaberDir)\Plugins\SongPlayHistory.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <Private>false</Private>

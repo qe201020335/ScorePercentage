@@ -18,6 +18,8 @@ internal class Plugin
     private const string MultiplayerInfoId = "MultiplayerInfo";
     private const string MappingExtensionsId = "MappingExtensions";
     private const string SongPlayHistoryId = "SongPlayHistory";
+    private const string ScoreSaberId = "ScoreSaber";
+    private const string BeatLeaderId = "BeatLeader";
 
     internal static Plugin Instance { get; private set; } = null!;
     internal static Logger Logger { get; private set; } = null!;
@@ -27,6 +29,8 @@ internal class Plugin
     internal bool MultiplayerInfoInstalled { get; }
     internal bool MappingExtensionsInstalled { get; }
     internal PluginMetadata? SPHMetadata { get; }
+    internal PluginMetadata? SSMetadata { get; }
+    internal PluginMetadata? BLMetadata { get; }
 
     // Methods with [Init] are called when the plugin is first loaded by IPA.
     // All the parameters are provided by IPA and are optional.
@@ -42,6 +46,8 @@ internal class Plugin
         MultiplayerInfoInstalled = PluginManager.EnabledPlugins.Any(metadata => metadata.Id == MultiplayerInfoId);
         MappingExtensionsInstalled = PluginManager.EnabledPlugins.Any(metadata => metadata.Id == MappingExtensionsId);
         SPHMetadata = PluginManager.GetPluginFromId(SongPlayHistoryId);
+        SSMetadata = PluginManager.GetPluginFromId(ScoreSaberId);
+        BLMetadata = PluginManager.GetPluginFromId(BeatLeaderId);
 
         zenjector.UseLogger(Logger);
         zenjector.UseAutoBinder();
@@ -55,6 +61,7 @@ internal class Plugin
         else
         {
             zenjector.Install<SongPlayDataInstaller>(Location.App);
+            zenjector.Install<SongPlayTrackingInstaller>(Location.StandardPlayer | Location.MultiPlayer);
         }
 
         zenjector.Install<MenuInstaller>(Location.Menu);

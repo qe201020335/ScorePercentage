@@ -9,5 +9,7 @@ internal interface IDataProvider
 
     Task<int> GetMaxMultipliedScore(BeatmapKey beatmapKey, CancellationToken token);
 
+    void AddLevelCompletionResultsExtraData(LevelCompletionResults results, LevelResultsExtraData extraData);
+
     LevelResultsExtraData? GetLevelCompletionResultsExtraData(LevelCompletionResults results);
 }

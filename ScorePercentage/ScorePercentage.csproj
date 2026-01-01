@@ -52,6 +52,12 @@
     <Reference Include="BeatSaber.ViewSystem">
       <Private>false</Private>
     </Reference>
+    <Reference Include="BGLib.AppFlow">
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="BGLib.UnityExtension">
+      <Private>false</Private>
+    </Reference>
     <Reference Include="BGNetCore">
       <Private>false</Private>
     </Reference>

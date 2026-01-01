@@ -30,6 +30,10 @@ internal class SPHDataProvider : IDataProvider
         return info.MaxMultipliedScore;
     }
 
+    public void AddLevelCompletionResultsExtraData(LevelCompletionResults results, LevelResultsExtraData extraData)
+    {
+        // do nothing
+    }
 
     public LevelResultsExtraData? GetLevelCompletionResultsExtraData(LevelCompletionResults results)
     {

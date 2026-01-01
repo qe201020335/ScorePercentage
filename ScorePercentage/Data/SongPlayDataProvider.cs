@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using IPA.Logging;
@@ -21,6 +22,8 @@ internal class SongPlayDataProvider : IDataProvider
 
     [Inject]
     private readonly BeatmapDataLoader _beatmapDataLoader = null!;
+
+    private readonly ConditionalWeakTable<LevelCompletionResults, LevelResultsExtraData> _resultTable = new();
 
     private readonly Dictionary<BeatmapKey, int> _cache = new();
 
@@ -85,6 +88,11 @@ internal class SongPlayDataProvider : IDataProvider
         return maxScore;
     }
 
-    //TODO
-    public LevelResultsExtraData? GetLevelCompletionResultsExtraData(LevelCompletionResults results) => null;
+    public void AddLevelCompletionResultsExtraData(LevelCompletionResults results, LevelResultsExtraData extraData)
+    {
+        _resultTable.Add(results, extraData);
+    }
+
+    public LevelResultsExtraData? GetLevelCompletionResultsExtraData(LevelCompletionResults results) =>
+        _resultTable.TryGetValue(results, out var extraData) ? extraData : null;
 }

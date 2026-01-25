@@ -40,10 +40,10 @@ internal class LevelStatsViewPatch : IAffinity, IDisposable
         var highScore = playerLevelStats.validScore ? playerLevelStats.highScore : 0;
         var beatmapKey = playerLevelStats.GetBeatmapKey();
 
-        var historyHighScore = _dataProvider.GetHistoryHighScore(beatmapKey);
-        if (historyHighScore > 0)
+        if (highScore <= 0)
         {
-            highScore = Math.Max(playerLevelStats.highScore, historyHighScore);
+            // use history data to show high score
+            highScore = _dataProvider.GetHistoryHighScore(beatmapKey);
             __instance._highScoreText.text = highScore.ToString();
         }
 

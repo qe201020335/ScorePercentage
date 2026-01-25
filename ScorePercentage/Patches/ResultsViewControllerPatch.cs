@@ -47,11 +47,11 @@ internal class ResultsViewControllerPatch : IAffinity
             return;
         }
 
+        /*
         int resultScore;
 
         // Old Score Percentage uses multiplied score for "positive" modifiers so it doesn't exceed 100% and modified score for "negative" modifiers
         // However the high score from player data is always the modified score so there will be cases where the percentage diff doesn't make sense
-        // Unless we use SPH's records for high score, but it may not always be consistent with the player data
         // condition copied from old Score Percentage
         if ((results.gameplayModifiers.noFailOn0Energy && extraData.EnergyDidReach0)
             || results.gameplayModifiers.enabledObstacleType != GameplayModifiers.EnabledObstacleType.All
@@ -66,7 +66,9 @@ internal class ResultsViewControllerPatch : IAffinity
         else
         {
             resultScore = results.multipliedScore;
-        }
+        } */
+
+        var resultScore = results.modifiedScore;
 
         var maxScore = extraData.MaxMultipliedScore;
         var resultScorePercentage = resultScore / (float)maxScore * 100;
